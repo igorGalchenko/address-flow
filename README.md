@@ -35,15 +35,11 @@ Show shipping Notes
                             Modal -> Update in account -> Save in checkout -> Show addr as text (1)
                         case Check:
                             Save -> Save in checkout -> Show addr as text (1)
+                        case New:
+                            Show empty address form      : State (3)
+                            -> Fill Form -> Save in account -> Save in checkout -> Show addr as text (1)
                     }
             } else {/* Hide address list */ }
-
-            ////////////////////////////////////////////
-
-            // addNewAddress link 
-            case New:
-                    Show empty address form      : State (3)
-                    -> Fill Form -> Save in account -> Save in checkout -> Show addr as text (1)
 
             ///////////////////////////////////////////
 
