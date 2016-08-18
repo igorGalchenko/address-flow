@@ -10,6 +10,8 @@ State (1) - Show address as text
 
 Show shipping Notes
 
+Next Step Button only here!!!!!!
+
 ////////////////////////////////
 
 
@@ -37,7 +39,7 @@ Show shipping Notes
                             Save -> Save in checkout -> Show addr as text (1)
                         case New:
                             Show empty address form      : State (3)
-                            -> Fill Form -> Save in account -> Save in checkout -> Show addr as text (1)
+                            -> Fill Form -> Save in account (if logged in) -> Save in checkout -> Show addr as text (1)
                     }
             } else {/* Hide address list */ }
 
