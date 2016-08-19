@@ -30,15 +30,18 @@ if (checkout.address === null) {                       // No saved address in ch
 //////////////////////////////////////
 function previewAddress()          (1) 
 //////////////////////////////////////
-     showAddressBrief(addr)        // Address as text block
-     showShippingNotes(addr)       // For shipping address only
-     showNexStepAction             // Next step button
+     elemAddressBrief(addr)        // Address as text block
+     if (isShippingAddress()) {
+          elemShippingNotes(addr)  // Shipping notes (for shipping address only)
+     }
+     elemNexStepAction             // Next step button
 
 
      // Actions
      switch(action) {
           case Change:  
-               id = checkout.address.id  // address ID in checkout
+               // address ID in checkout
+               id = checkout.address.id  
                
                if (id !== null && (id in addresses)) {      // If ID is present in address list
                     listAddresses()                              // Show list (2)
@@ -55,21 +58,21 @@ function previewAddress()          (1)
 ////////////////////////////////////////////
 function listAddresses()                 (2)
 ////////////////////////////////////////////
-     showAddressList(addresses)    // Address list block
-     showAddNewAddressAction       // New address button
+     elemAddressList(addresses)    // Address list block
+     elemAddNewAddressAction       // New address button
 
      // Actions for address list
      switch(action) {
           case Edit(id):
-               addr = getAddressById(id)                    // Get address by id
-               showModal(addr)                              // Show modal and preset form with address
+               addr = getAddressById(id)                    // Get address by id 
+               showModal(addr)                              // Show modal and preset form with address TODO: Could be binded ?
                validate(addr)                               // Validate form (after submit)
                visitorService.updateAddress(id, addr)       // Update address in visitor's account
                checkoutService.saveAddress(addr)            // Save address in checkut
                previewAddress()                             // Show addr as text (1)
                
           case Choose:
-               addr = getAddressById(id)                    // Get address by id
+               addr = getAddressById(id)                    // Get address by id 
                checkoutService.saveAddress(addr)            // Save address in chekcout
                previewAddress()                             // Show addr as text (1)
           
@@ -82,8 +85,8 @@ function listAddresses()                 (2)
 //////////////////////////////////////////
 function showAddressForm()             (3)
 //////////////////////////////////////////
-     showForm                           // Form
-     showUseAddressAction               // Use this address button
+     elemForm                           // Form
+     elemUseAddressAction               // Use this address button
 
      // Actions
      switch(action) {                        
