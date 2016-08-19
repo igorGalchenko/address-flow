@@ -34,7 +34,7 @@ function previewAddress()          (1)
      if (isShippingAddress()) {
           elemShippingNotes(addr)  // Shipping notes (for shipping address only)
      }
-     elemNexStepAction             // Next step button
+     elemNextStepAction             // Next step button
 
 
      // Actions
@@ -45,7 +45,8 @@ function previewAddress()          (1)
                
                if (id !== null && (id in addresses)) {      // If ID is present in address list
                     listAddresses()                              // Show list (2)
-                    selectAddress(id)                            // Select address in list by ID TODO: Could be binded ?
+                    selectAddress(id)                            // Select address in list by ID 
+                                                                 // TODO: Could be binded ?
                } else {                                     // If ID is null or no such ID in the address list 
                     if (addresses.length > 0) {                  // If User has saved addresses
                          listAddresses()                              // Show list (2)
@@ -65,14 +66,24 @@ function listAddresses()                 (2)
      switch(action) {
           case Edit(id):
                addr = getAddressById(id)                    // Get address by id 
-               showModal(addr)                              // Show modal and preset form with address TODO: Could be binded ?
+                                                            // TODO: Always reload from server ?
+                                                            
+               showModal(addr)                              // Show modal and preset form with address 
+                                                            // TODO: Could be binded to the modal form?
+                                                            
                validate(addr)                               // Validate form (after submit)
-               visitorService.updateAddress(id, addr)       // Update address in visitor's account
+                                                            // TODO: Native angular validation $valid ?
+               
+               visitorService.updateAddress(id, addr)       // Update address in visitor's account 
+                                                            // TODO set as default if checked
+                                                            
                checkoutService.saveAddress(addr)            // Save address in checkut
                previewAddress()                             // Show addr as text (1)
                
           case Choose:
                addr = getAddressById(id)                    // Get address by id 
+                                                            // TODO: Always reload from server ?
+                                                            
                checkoutService.saveAddress(addr)            // Save address in chekcout
                previewAddress()                             // Show addr as text (1)
           
@@ -92,8 +103,11 @@ function showAddressForm()             (3)
      switch(action) {                        
           case UseAddress:
                validate(addr)                               // Validate address
+                                                            // TODO: Native angular validation $valid ?
+                                                            
                if (isLoggedIn) {                            // If visitor is logged in
                     visitorService.saveAddress(addr)             // Save address in visitor's account
+                                                                 // TODO set as default if checked
                }
                checkoutService.saveAddress(addr)            // Save adddress in chekcout
                previewAddress()                             // Show addr as text (1)
