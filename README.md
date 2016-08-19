@@ -52,7 +52,7 @@ Show address as text        Point (1)
                          - Show address form (3.3) // Form is visible, 'add new address' hidden
                     }
                     
-                    - Preset Address Form with saved values
+                    - Preset Address Form with saved values // Can be already binded ?
                     
                } else { // ID in address list
                     - Check one of the radios in the list
