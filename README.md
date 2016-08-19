@@ -30,9 +30,9 @@ if (checkout.address === null) {                       // No saved address in ch
 //////////////////////////////////////
 function previewAddress()          (1) 
 //////////////////////////////////////
-     showAddressBrief(addr)
-     showShippingNotes(addr)   // For shipping address only
-     showNexStepAction
+     showAddressBrief(addr)        // Address as text block
+     showShippingNotes(addr)       // For shipping address only
+     showNexStepAction             // Next step button
 
 
      // Actions
@@ -42,21 +42,21 @@ function previewAddress()          (1)
                
                if (id !== null && (id in addresses)) {      // If ID is present in address list
                     listAddresses()                              // Show list (2)
-                    selectAddress(id)                            // Select address in list by ID
-               } else {                                     // If Null ID or no such ID in the address list 
+                    selectAddress(id)                            // Select address in list by ID TODO: Could be binded ?
+               } else {                                     // If ID is null or no such ID in the address list 
                     if (addresses.length > 0) {                  // If User has saved addresses
                          listAddresses()                              // Show list (2)
                     }
                     showAddressForm()                            // Show form (3)
-                    presetAddressForm()                          //TODO: Could be already binded ?
+                    presetAddressForm()                          //TODO: Could be binded ?
                }
      });
      
 ////////////////////////////////////////////
 function listAddresses()                 (2)
 ////////////////////////////////////////////
-     showAddressList(addresses)
-     showAddNewAddressAction
+     showAddressList(addresses)    // Address list block
+     showAddNewAddressAction       // New address button
 
      // Actions for address list
      switch(action) {
@@ -82,8 +82,8 @@ function listAddresses()                 (2)
 //////////////////////////////////////////
 function showAddressForm()             (3)
 //////////////////////////////////////////
-     showForm
-     showUseAddressAction
+     showForm                           // Form
+     showUseAddressAction               // Use this address button
 
      // Actions
      switch(action) {                        
