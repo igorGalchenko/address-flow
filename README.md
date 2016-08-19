@@ -5,8 +5,9 @@ checkout = {...} // checkout object
 addresses = [...] // user saved addresses
 defaultAddressId = "<ID>" // user's default address id
 
-
-
+//////////////////////////////////
+General Flow
+//////////////////////////////////
 if (checkout.shippingAddress === null) {     // No address saved in checkout
      if (defaultAddressId !== null) {             // User has default address id
           - Get address by id                          // Get default address
