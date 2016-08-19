@@ -63,7 +63,6 @@ Show address as text        Point (1)
 Show address list                 Point (2)
 ////////////////////////////////////////////
      - Show address list
-     - Show point (3.1) // Form hidden, 'add new address' visible
 
      // Actions for address list
      switch(action) {
