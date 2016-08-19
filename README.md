@@ -31,7 +31,7 @@ if (checkout.shippingAddress === null) { // No shipping address saved in checkou
 Show address as text        Point (1) 
 ///////////////////////////////////////
      Show shipping Notes
-     Next Step Button only here
+     Show 'Next Step' Button
 
      // Actions
      switch(action) {
