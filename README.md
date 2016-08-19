@@ -7,56 +7,45 @@ defaultAddressId = "<ID>" // user's default address id
 
 
 
-if (checkout.shippingAddress === null) { // No address saved in checkout
-
-     if (defaultAddressId !== null) { // User has default address id
-          
-          - Get address by id
-          - Save in checkout
-          - Show address as text (1)
-          
-     } else {  // defaultAddress === null
-          if (addresses.length > 0) { // User has saved addresses
-               - Show address list (2)
-               - Show address form (3.1) // Form hidden, 'add new address' visible
-          } else { // User doesn't have saved addresses
-               - Show address form (3.3) // Form visible, 'add new address' hidden
+if (checkout.shippingAddress === null) {     // No address saved in checkout
+     if (defaultAddressId !== null) {             // User has default address id
+          - Get address by id                          // Get default address
+          - Save in checkout                           // Save it in checkout
+          - Show address as text (1)                   // Show addr as text
+     } else {                                     // No default address id
+          if (addresses.length > 0) {                  // User has saved addresses
+               - Show address list (2)                      // Show addr list
+               - Show address form (3.2)                    // Hide form
+          } else {                                     // User doesn't have saved addresses
+               - Show address form (3.1)                    // Show form
           }
     }
-    
-} else { // addres is present in checkout
-     - Show address as text (1)
+} else {                                     // Addres is present in checkout
+     - Show address as text (1)                   // Show addr as text
 }
 
 //////////////////////////////////////
 Show address as text        Point (1) 
 ///////////////////////////////////////
-     - Show shipping Notes // Shipping address only
+     - Show shipping Notes // For Shipping address only
      - Show 'Next Step' Button
 
      // Actions
      switch(action) {
           // Address is shown as text and user clicks on Edit button
           case Change:  
-               if (addresses.length > 0) { // User has saved addresses
-                    show address list (2)
-               }
-     
-               ID = checkout.shippingAddress.ID = "<ID>" // address ID saved in checkout
-     
-               if (ID === undefined || !(ID in addresses)) { // Undefined ID or no such ID in the address list 
+               ID = checkout.shippingAddress.ID = "<ID>"    // Get address ID in checkout
                
-                    if (addresses.length > 0) { // User has saved addresses
-                         - Show address form (3.2) // Form is visible, 'add new address' visible
-                    } else { // User doesn't have saved addresses
-                         - Show address form (3.3) // Form is visible, 'add new address' hidden
+               if (ID !== undefined && (ID in addresses)) { // ID is present in address list
+                    - Show address list (2)                      // Show list
+                    - Check one of the radios in the list        // Check list item
+                    - Show address form (3.2)                    // Hide form
+               } else {                                     // Undefined ID or no such ID in the address list 
+                    if (addresses.length > 0) {                  // User has saved addresses
+                         - Show address list (2)                      // Show list
                     }
-                    
-                    - Preset Address Form with saved values // Can be already binded ?
-                    
-               } else { // ID in address list
-                    - Check one of the radios in the list
-                    - Show address form (3.1) // Form is hidden, 'add new address' visible
+                    - Show address form (3.1)                    // Show form
+                    - Preset Address Form with saved values      //TODO: Can be already binded ?
                }
      });
      
@@ -64,6 +53,7 @@ Show address as text        Point (1)
 Show address list                 Point (2)
 ////////////////////////////////////////////
      - Show address list
+     - Show 'add new address' button
 
      // Actions for address list
      switch(action) {
@@ -79,7 +69,8 @@ Show address list                 Point (2)
                - Show addr as text (1)
           
           case New:
-               - show address form (3.2) // Form visible, 'add new address' visible
+               - Clear address form
+               - Show address form (3.1) // Form visible
                
      }
      
@@ -87,24 +78,18 @@ Show address list                 Point (2)
 Show address form         Point (3)
 //////////////////////////////////////////
      Point (3.1) 
-          - form is hidden
-          - `add new address` button is visible
+          - form is visible
      Point (3.2)
-          - form is visible
-          - `add new address` button is visible
-     Point (3.3)
-          - form is visible
-          - `add new address` button is hidden
+          - form is hidden
+
      
      // Actions for new address form
      switch(action) {
-          case AddNewAddress:
-               - Clear Form
-               - Show Form
-               
           case UseAddress:
                - Validate
-               - Save in account (if logged in) // Optional
+               if (loggedIn) {
+                    - Save in account 
+               }
                - Save in checkout
                - Show addr as text (1)
      }
