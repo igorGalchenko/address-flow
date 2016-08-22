@@ -53,6 +53,7 @@ function previewAddress()          (1)
                     }
                     showAddressForm()                            // Show form (3)
                     presetAddressForm()                          //TODO: Could be binded ?
+                    hide elemAddNewAddressAction       	     // New address button
                }
      });
      
